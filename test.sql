@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: 2017-08-09 04:01:58
+-- Generation Time: 2017-08-17 00:49:16
 -- 服务器版本： 5.6.36
 -- PHP Version: 5.6.31
 
@@ -48,8 +48,8 @@ CREATE TABLE `article` (
 --
 
 INSERT INTO `article` (`id`, `name`, `author`, `http`, `date`, `thumbs_up`, `collection`, `overview`, `category1`, `category2`, `category3`, `text`) VALUES
-(10009, '测试文件', 'admin', './images/covers/d2779619e6824953b4442bb9b664c7b7.png', '2017-08-07 20:22:52', 1, '0', 14, 1, 1, 1, '高中语文'),
-(10008, '高中生物必修一', 'admin', './images/covers/1375062dbaeb952a070aa8aae5d63517.jpg', '2017-08-07 18:44:31', 1, '0', 122, 6, 1, 1, '具有动能的生命体，也是一个物体的集合，而个体生物指的是生物体，与非生物相对。其元素包括：在自然条件下，通过化学反应生成的具有生存能力和繁殖能力的有生命的物体以及由它（或它们）通过繁殖产生的有生命的后代，能对外界的刺激做出相应反应，能与外界的环境相互依赖、相互促进。并且，能够排出体内无用的物质，具有遗传与变异的特性。');
+(10011, '高中语文', 'admin', './images/covers/dd31d0374b3c82df56673695abc90fe2.jpg', '2017-08-16 01:48:12', 0, '0', 3, 1, 1, 1, '111'),
+(10010, '生物必修一精品课件', 'admin', './images/covers/e6502fbaee7e5562164d373b9decf4b7.jpg', '2017-08-09 04:53:49', 1, '0', 61, 6, 1, 1, '具有动能的生命体，也是一个物体的集合，而个体生物指的是生物体，与非生物相对。其元素包括：在自然条件下，通过化学反应生成的具有生存能力和繁殖能力的有生命的物体以及由它（或它们）通过繁殖产生的有生命的后代，能对外界的刺激做出相应反应，能与外界的环境相互依赖、相互促进。并且，能够排出体内无用的物质，具有遗传与变异的特性。');
 
 -- --------------------------------------------------------
 
@@ -69,10 +69,9 @@ CREATE TABLE `captcha` (
 --
 
 INSERT INTO `captcha` (`captcha_id`, `captcha_time`, `ip_address`, `word`) VALUES
-(575, 1502245001, '::1', 'juc1'),
-(574, 1502244990, '::1', 'q9ng'),
-(573, 1502244982, '::1', 'zmfz'),
-(572, 1502244979, '::1', 'enqn');
+(1000, 1502955801, '202.118.67.200', 'qpwo'),
+(1001, 1502955808, '202.118.67.200', '7fqm'),
+(1002, 1502955815, '202.118.67.200', 'pe5l');
 
 -- --------------------------------------------------------
 
@@ -140,18 +139,10 @@ CREATE TABLE `resources` (
 --
 
 INSERT INTO `resources` (`id`, `article_id`, `type`, `file1`, `file2`, `file3`, `cid`) VALUES
-(4, 10007, 0, './resources/评分标准2016.docx', './resources/新建_Microsoft_Word_文档1.docx', './resources/C语言期末考试题2016-A1.doc', 4),
-(5, 10008, 0, './resources/自主版权课件1_组成细胞的元素和化合物.doc', './resources/专题1_细胞的分子组成.ppt', './resources/单元质量评估（一）.doc', 1),
-(6, 10008, 0, './resources/自主版权课件2_细胞的结构和功能1.doc', './resources/专题2_细胞的结构1.ppt', './resources/第二章组成细胞的分子综合测试题1.doc', 2),
-(7, 10008, 0, './resources/自主版权课件3_酶与ATP、细胞呼吸.doc', './resources/专题3_物质跨膜运输、酶和ATP.ppt', './resources/考试3_酶与ATP、细胞呼吸.doc', 3),
-(8, 10008, 0, './resources/自主版权课件4_光合作用.doc', './resources/单元质量评估（四）.doc', './resources/单元质量评估（四）1.doc', 4),
-(9, 10008, 0, './resources/自主版权课件5_细胞的生命历程.doc', './resources/自主版权课件5_细胞的生命历程1.doc', './resources/第五章细胞的能量供应和利用综合测试题.doc', 5),
-(10, 10008, 1, './resources/必修一课时训练（_第一章_走进细胞）1.DOC', './resources/必修一课时训练（第六章_第一讲_细胞的增殖）.DOC', '', 6),
-(11, 10008, 1, './resources/【人教版】2014届高三生物一轮复习专题培优课_解答蛋白质计算题的三把“金钥匙”1.doc', './resources/【人教版】2014届高三生物一轮复习专题培优课_破解酶实验难题的三种方法1.doc', '', 7),
-(12, 10009, 0, './resources/58bced3a06e49.doc', './resources/58bced3a06e491.doc', './resources/58bcef0c9899c.doc', 1),
-(13, 10009, 0, './resources/97881Z_(1).pdf', './resources/97881Z_(1)1.pdf', './resources/97881Z.pdf', 2),
-(14, 10009, 1, './resources/A-151.pdf', './resources/ICCCT.pdf', '', 3),
-(15, 10009, 1, './resources/58bcef0c9899c1.doc', '', '', 4);
+(16, 10010, 0, './resources/自主版权课件1_组成细胞的元素和化合物.pdf', './resources/专题1_细胞的分子组成.pdf', './resources/单元质量评估（一）.pdf', 1),
+(17, 10010, 0, './resources/自主版权课件2_细胞的结构和功能.pdf', './resources/专题2_细胞的结构.pdf', './resources/第二章组成细胞的分子综合测试题.pdf', 2),
+(18, 10010, 1, './resources/【人教版】2014届高三生物一轮复习专题培优课_解答蛋白质计算题的三把“金钥匙”.pdf', './resources/【人教版】2014届高三生物一轮复习专题培优课_破解酶实验难题的三种方法.pdf', '', 3),
+(19, 10011, 0, './resources/2015高考（人教通用）物理大二轮复习配套试题：牛顿运动定律（含2014试题）.pdf', '', '', 1);
 
 -- --------------------------------------------------------
 
@@ -178,8 +169,9 @@ CREATE TABLE `usr` (
 --
 
 INSERT INTO `usr` (`id`, `username`, `password`, `slug`, `email`, `status`, `role`, `regis_time`, `regis_ip`, `last_time`, `last_ip`) VALUES
-(10004, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin', '312@qq.com', '1', '1', '2017-07-20-21:15:15', '::1', '2017-08-08-19:16:41', '::1'),
-(10005, '刘相', 'e10adc3949ba59abbe56e057f20f883e', '刘相', '12314@11.com', '1', '1', '2017-07-21-22:16:31', '::1', '2017-07-26-14:59:37', '::1');
+(10004, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin', '312@qq.com', '1', '1', '2017-07-20-21:15:15', '::1', '2017-08-17-00:43:28', '202.118.67.200'),
+(10005, '刘相', 'e10adc3949ba59abbe56e057f20f883e', '刘相', '12314@11.com', '1', '1', '2017-07-21-22:16:31', '::1', '2017-07-26-14:59:37', '::1'),
+(10008, '张建豪', '0d464421c998fac88ca492d5db06315d', '张建豪', '245317115@qq.com', '1', '1', '2017-08-09-20:36:56', '175.167.130.207', '2017-08-09-07:18:09', '175.167.130.207');
 
 -- --------------------------------------------------------
 
@@ -202,7 +194,8 @@ INSERT INTO `usr_link` (`id`, `article_id`, `usr`, `ca1`) VALUES
 (10000, 10000, 'admin', 1),
 (10001, 10002, 'admin', 1),
 (10002, 10008, 'admin', 1),
-(10003, 10009, 'admin', 1);
+(10003, 10009, 'admin', 1),
+(10004, 10010, 'admin', 1);
 
 --
 -- Indexes for dumped tables
@@ -260,12 +253,12 @@ ALTER TABLE `usr_link`
 -- 使用表AUTO_INCREMENT `article`
 --
 ALTER TABLE `article`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10010;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10012;
 --
 -- 使用表AUTO_INCREMENT `captcha`
 --
 ALTER TABLE `captcha`
-  MODIFY `captcha_id` bigint(13) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=576;
+  MODIFY `captcha_id` bigint(13) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1003;
 --
 -- 使用表AUTO_INCREMENT `category`
 --
@@ -280,17 +273,17 @@ ALTER TABLE `category2`
 -- 使用表AUTO_INCREMENT `resources`
 --
 ALTER TABLE `resources`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '资源ID', AUTO_INCREMENT=16;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '资源ID', AUTO_INCREMENT=20;
 --
 -- 使用表AUTO_INCREMENT `usr`
 --
 ALTER TABLE `usr`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10008;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10009;
 --
 -- 使用表AUTO_INCREMENT `usr_link`
 --
 ALTER TABLE `usr_link`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10004;COMMIT;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10005;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
