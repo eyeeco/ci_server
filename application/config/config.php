@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://123.207.226.25/demo/';
+$config['base_url'] = 'http://localhost/demo';
 
 /*http://10.104.50.61/demo/css/bootstrap.min.css Failed to load resource: net::ERR_CONNECTION_TIMED_OUT
 |--------------------------------------------------------------------------

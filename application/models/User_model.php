@@ -32,7 +32,7 @@ class User_model extends CI_Model{
 
 		$vals = array(
    		'img_path'  => './captcha/',
-   		'img_url'   => 'http://123.207.226.25/demo/captcha/',
+   		'img_url'   => './captcha/',
    		'expiration'    => 10,
    		'word_length'   => 4,
    		'pool'      => '0123456789abcdefghijklmnopqrstuvwxyz'
