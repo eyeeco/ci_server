@@ -43,7 +43,7 @@ class Login extends CI_Controller{
 		$ok=$this->user_model->commit_code();
 		}
 
-		if($ok&&$this->user_model->check_login()){
+		if($this->user_model->check_login()){
 			$this->session->set_userdata('user',$this->input->post("user"));
 			$this->user_model->login_record();
 			redirect('frame/index');
