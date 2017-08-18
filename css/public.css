@@ -16,7 +16,6 @@ img{ border:none;}
 .border{border:1px solid #F00;}
 .mr-top{ margin-top:20px;}
 .header{ height:60px; background:#333; line-height:60px; padding-right:20px;overflow: hidden;}
-.container{ margin:0 auto; color:#656e73;}
 /* .container{ width:1200px; margin:0 auto; color:#656e73;min-width: 1200px;} */
 .left{ float:left;}
 .right{ float:right;}
