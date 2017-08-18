@@ -139,11 +139,11 @@ html, body {
             margin: 0 4px;
         }
 		/*结束*/
-.course-list ul {
+/* .course-list ul {
     margin-left: -5%;
 }
 .course-list ul {
-    margin: 0 -20px 0 -60px;}
+    margin: 0 -20px 0 -60px;} */
 .course-list li {
     background: #fff;
     background: #f7faf9\0/;
@@ -229,9 +229,9 @@ html, body {
     padding-left: 0;
     padding-right: 0;
 }
-.course-list ul {
+/* .course-list ul {
     margin: 0 -20px 0 -60px;
-}
+} */
 .course-list li .tips {
     margin: 0;
     padding: 0;
