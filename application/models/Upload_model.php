@@ -43,8 +43,8 @@
             $this->db->insert('files', $data);
         }
 
-        public function get_resource($id,$type){
-                $query = $this->db->get_where("resources",array("article_id"=>$id,"type"=>$type));
+        public function get_resource($id){
+                $query = $this->db->get_where("files",array("aid"=>$id));
                 return $query->result_array();
         }
     }

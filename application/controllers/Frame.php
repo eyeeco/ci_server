@@ -47,8 +47,11 @@ class Frame extends CI_controller {
 	$this->news_model->flash_up($this->uri->segment(3));
 	}
 
-	$data["resouce1"]=$this->upload_model->get_resource($this->uri->segment(3),0);
-	$data["resouce2"]=$this->upload_model->get_resource($this->uri->segment(3),1);
+	// $data["resouce1"]=$this->upload_model->get_resource($this->uri->segment(3),0);
+	// $data["resouce2"]=$this->upload_model->get_resource($this->uri->segment(3),1);
+
+	$data["file"]=$this->upload_model->get_resource($this->uri->segment(3));
+
 	//得到级别 高中/初中
 	$ca2 = get_object_vars($data["article_info"][0])["category2"];
 	$data["ca2_info"] = $this->news_model->get_ca2($ca2);

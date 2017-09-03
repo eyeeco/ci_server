@@ -103,71 +103,31 @@
 								</div>
 								<div class="panel-body">
 									<?php 
-									foreach ($resouce1 as $key => $value) {
+									foreach ($file as $key => $value) {
 										# code...
 									
 									?>
 
 									<h3>
-									<span>第<?php echo $value['cid']?>章课程资料</span>		
+									<span><?php echo $value['fname']?></span>		
 									
 
 									<span style="float: right;">
-									<a href="<?php echo  $value['file1'] ?>" target="_blank">
-									<button class="btn btn-primary" type="button" >
-									课件 
+								
+
+									<a href="<?php echo  $value['fpath'] ?> " target="_blank">
+									<button class="btn btn-primary" type="button">
+								 	查看
 									</button>
 									</a>
 
-									<a href="<?php echo  $value['file2'] ?> " target="_blank">
-									<button class="btn btn-primary" type="button">
-									教案 
-									</button>
-									</a>
-									<a href="<?php echo  $value['file3'] ?> " target="_blank">
-									<button class="btn btn-primary" type="button">
-									单元测试 
-									</button>
-									</a>
+									
 									</span>
 									</h3>
 
 									<?php 
 									}
 									?>
-									<!--
-									<h3>
-									<span>期中测试资料</span>		
-									<span style="float: right;">
-									<a href="<?php echo $resouce2[0]['file1'] ?>" target="_blank">
-									<button class="btn btn-primary" type="button" >
-									期中测试1 
-									</button>
-									</a>
-									<a href="<?php echo $resouce[0]['file2'] ?>" target="_blank">
-									<button class="btn btn-primary" type="button" >
-									期中测试2 
-									</button>
-									</a>
-									</span>
-									</h3>
-									-->
-									<h3>
-									<span>期末测试资料</span>		
-									<span style="float: right;">
-										<a href="<?php echo $resouce2[0]['file1'] ?>" target="_blank">
-									<button class="btn btn-primary" type="button" >
-									期末测试1 
-									</button>
-									</a>
-
-									<a href="<?php echo $resouce2[0]['file2'] ?>" target="_blank">
-									<button class="btn btn-primary" type="button" >
-									期末测试2
-									</button>
-									</a>
-									</span>
-									</h3>
 								</div>
 							</div>
 				
