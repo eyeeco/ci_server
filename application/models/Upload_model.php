@@ -34,13 +34,13 @@
         }
 
         // 插入章节
-        public function add_chapter($chapter) {
-            for ($i = 1; $i <= 3; $i++) {
-                if ($chapter['file'.$i] != '') {
-                    $chapter['file'.$i] = './resources/'.$chapter['file'.$i];
-                }
-            }
-            $this->db->insert('resources', $chapter);
+        public function add_chapter($file) {
+            $data = array(
+                'aid'   => $file['aid'],
+                'fname' => $file['fname'],
+                'fpath' => $file['fpath']
+            );
+            $this->db->insert('files', $data);
         }
 
         public function get_resource($id,$type){

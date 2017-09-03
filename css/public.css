@@ -16,14 +16,14 @@ img{ border:none;}
 .border{border:1px solid #F00;}
 .mr-top{ margin-top:20px;}
 .header{ height:60px; background:#333; line-height:60px; padding-right:20px;overflow: hidden;}
-.container{ width:1200px; margin:0 auto; color:#656e73;min-width: 1200px;}
+/* .container{ width:1200px; margin:0 auto; color:#656e73;min-width: 1200px;} */
 .left{ float:left;}
 .right{ float:right;}
 
 
 
 
-/*¿Î³Ì·½Ïò²¿·Ö*/
+/*è¯¾ç¨‹æ–¹å‘éƒ¨åˆ†*/
 .course-nav-hd{
 	font-size:16px;
 	font-weight:bold;
@@ -39,23 +39,23 @@ img{ border:none;}
 }
 
 
-/*ÑîÍ®»Ô²¿·Ö½áÊø */	
+/*æ¨å½¤è¾‰éƒ¨åˆ†ç»“æŸ */	
 
-/*ZZ²¿·Ö*/	
+/*ZZéƒ¨åˆ†*/	
 .course-tool-ba{
 	height:41px;
 /*	line-height:41px;*/
 	border-top:1px solid #d0d6d9;
 	background:#f9f9f9;
 	}
-/*ZZ²¿·Ö½áÊø*/
+/*ZZéƒ¨åˆ†ç»“æŸ*/
 
 /*.bottom{
 	background:#000;
 	padding:27px 0px;
 	border:1px solid #f00;
 }*/
-/*·ÖÒ³*/
+/*åˆ†é¡µ*/
   .course-page-num{
             height:100px;
 
@@ -98,7 +98,7 @@ img{ border:none;}
         }
 
 
-/*×îĞÂ*/
+/*æœ€æ–°*/
         .newCourse{
             height:40px;
             line-height:40px;
@@ -117,7 +117,7 @@ img{ border:none;}
             cursor:pointer;
         }
 		
-/*È«²¿»Ø´ğ*/
+/*å…¨éƒ¨å›ç­”*/
 .ty_good_anwser{
 	line-height:80px;
 }
@@ -135,7 +135,7 @@ img{ border:none;}
 }
 
 
-/*Ä½¿ÎÉçÇø*/
+/*æ…•è¯¾ç¤¾åŒº*/
 .ty_mksq{
 	height:73px;
 	line-height:73px;

@@ -29,39 +29,17 @@
             }
 
             // 上传章节资料
+            if ($data['status'] == 'chapters') {
+                $data['upload_err'] = '';
+            }
             if ($data['status'] == 'chapters' && $this->input->post('uploadchapter') !== NULL) {
                 $data = $this->upload_files($data, 0);
             }
 
-            // 不再上传章节资料，去上传考试试卷
-            if ($data['status'] == 'chapters' && $this->input->post('goexam') !== NULL) {
-                $data['status'] = 'midexam';
-            }
-
-            // 上传期中试卷
-            if ($data['status'] == 'midexam' && $this->input->post('uploadmidexam') !== NULL) {
-                $data = $this->upload_files($data, 1);
-            }
-
-            // 无期中试卷，上传期末试卷
-            if ($data['status'] == 'midexam' && $this->input->post('goendexam')) {
-                $data['status'] = 'endexam';
-            }
-
-            // 上传期末试卷
-            if ($data['status'] == 'endexam' && $this->input->post('uploadendexam') !== NULL) {
-                $data = $this->upload_files($data, 2);
-            }
-
-            // 无期末试卷，结束本次上传
-            if ($data['status'] == 'endexam' && $this->input->post('gofinish') !== NULL) {
+            // 结束本次上传
+            if ($data['status'] == 'chapters' && $this->input->post('gofinish') !== NULL) {
                 $data['status'] = 'finish';
             }
-
-            // 不再上传，直接到最后一步
-            // if (!($data['status'] == 'chapters' && empty($data['records'][0])) && $this->input->post('gofinish') !== NULL) {
-            //     $data['status'] = 'finish';
-            // }
 
             // 完成上传
             if ($data['status'] == 'finish' && $this->input->post('finish') !== NULL) {
@@ -73,26 +51,21 @@
             $this->save_to_sessions($data);
 
             $sta = $this->session->userdata('user');
-             if (!isset($sta) ){
-             redirect('login/login_real');
-             }
-             $data["usr"] = $sta;
+            if (!isset($sta) ){
+                redirect('login/login_real');
+            }
+            $data["usr"] = $sta;
 
-         $this->load->view("upload/top",$data);
-         $this->load->view("upload/mid",$data);
-         $this->load->view("upload/foot");
+            $this->load->view("upload/top",$data);
+            $this->load->view("upload/mid",$data);
+            $this->load->view("upload/foot");
 
-        }
-
-        public function main(){
-       
         }
 
         // 从sessions中读取数据
         private function fetch_from_sessions() {
             $data['article']  = $this->session->userdata('article');
             $data['records']  = $this->session->userdata('records');
-            $data['maxcid']   = intval($this->session->userdata('maxcid'));
             $data['status']   = $this->session->userdata('status');
             $data['catnames'] = $this->session->userdata('catnames');
             return $data;
@@ -102,7 +75,6 @@
         private function save_to_sessions($data) {
             $this->session->set_userdata('article',  $data['article']);
             $this->session->set_userdata('records',  $data['records']);
-            $this->session->set_userdata('maxcid',   $data['maxcid']);
             $this->session->set_userdata('status',   $data['status']);
             $this->session->set_userdata('catnames', $data['catnames']);
         }
@@ -111,8 +83,7 @@
         private function new_page($data = array()) {
             $data['article'] = NULL;
             $data['cats']    = $this->upload_model->get_categories();
-            $data['records'] = array(array(), array(array(), array()));
-            $data['maxcid']  = 0;
+            $data['records'] = array();
             $data['status']  = 'baseinfos';
             
             $data['catnames'] = array(array(), array());
@@ -171,77 +142,45 @@
             return $data;
         }
 
-        // 章节或试卷文件上传
+        // 资料上传
         private function upload_files($data, $type = 0) {
+            $file = array(
+                'aid'               => $data['article']['id'], 
+                'fname'             => '', 
+                'fpath'             => '', 
+                'rname'             => ''
+            );
+
+            // 资料名称验证
+            $this->form_validation->set_rules('fname', '资料标题', 'required');
+            if (!$this->form_validation->run()) {
+                $data['upload_err'] .= validation_errors();
+            } else {
+                $file['fname']       = $this->input->post('fname');
+            }
+
+            // 资料文件上传验证
             $config = array(
-                'upload_path'   => './resources/',
-                'allowed_types' => 'pdf|ppt|pptx|doc|docx|txt',
-                'path_encoding' => 'GB2312'
+                'upload_path'       => './resources/',
+                'allowed_types'     => 'pdf|ppt|pptx|doc|docx|txt',
+                'path_encoding'     => 'GB2312'
             );
             $this->load->library('upload', $config);
-            $chapter = array();
-            $states  = array();
-            for ($i = 0; $i < 3; $i++) {
-                $file               = 'file'.($i+1);
-                $states[$i]         = $this->upload->do_upload($file);
-                if ($states[$i]) {
-                    $file_info      = $this->upload->data();
-                    $chapter[$file] = $file_info['file_name'];
-                } else {
-                    $chapter[$file] = '';
-                }
+            if (!$this->upload->do_upload('fpath')) {
+                $data['upload_err'] .= $this->upload->display_errors();
+            } else {
+                $fdata               = $this->upload->data();
+                $file['rname']       = $fdata['client_name'];
+                $file['fpath']       = './resources/'.$fdata['file_name'];
+                if ($data['upload_err'] !== '') { unlink(mb_convert_encoding($file['fpath'], 'GB2312', 'UTF-8')); }
             }
-            $data = $this->is_upload_error($data, $states);
-            if (!$data['upload_err'][0]) {
-                $chapter['article_id'] = $this->news_model->get_news_by_name($data['article']['name'])[0]['id'];
-                if ($type == 1 || $type == 2) {
-                    $chapter['type']   = '1';
-                } else {
-                    $chapter['type']   = '0';
-                }
-                $data['maxcid']        = $data['maxcid'] + 1;
-                $chapter['cid']        = $data['maxcid'];
 
-                $this->upload_model->add_chapter($chapter);
-                if ($type == 1) {
-                    $data['records'][1][0] = $chapter;
-                    $data['status']        = 'endexam';
-                } elseif($type == 2) {
-                    $data['records'][1][1] = $chapter;
-                    $data['status']        = 'finish';
-                } else {
-                    $data['records'][0][]  = $chapter;
-                    $data['status']        = 'chapters';
-                }
+            // 数据正确，插入数据库
+            if ($data['upload_err'] === '') {
+                $this->upload_model->add_chapter($file);
+                $data['records'][]   = $file;
             }
-            return $data;
-        }
 
-        // 判断上传的三个文件是否出现错误
-        public function is_upload_error($data, $states) {
-            $err_msg            = $this->upload->display_errors();
-            $err_arr            = array();
-            preg_match_all('/<p>(.*?)<\/p>/', $err_msg, $err_arr);
-            $data['upload_err'] = array(FALSE, '', '', '');
-            $titles             = array('教案', 'PPT', '测试');
-            
-            for ($file_no = 0, $err_no = 0; $file_no < 3; $file_no++) {
-                // 上传成功，继续
-                if ($states[$file_no])  continue;
-                // 出现错误，判断错误类型
-                $err = $err_arr[1][$err_no];
-                if ($err != 'You did not select a file to upload.') {
-                    $data['upload_err'][0]           = TRUE;
-                    $data['upload_err'][$file_no+1]  = $err;
-                }
-                $err_no++;
-            }
-            if (!$data['upload_err'][0] && $err_no == 3) {
-                $data['upload_err'][0] = TRUE;
-                $data['upload_err'][1] = 'You did not select a file to upload.';
-                $data['upload_err'][2] = 'You did not select a file to upload.';
-                $data['upload_err'][3] = 'You did not select a file to upload.';
-            }
             return $data;
         }
 
@@ -254,28 +193,4 @@
         }
 
     }
-?>
-<?php
-
-    /*
-        records = array(
-            [0] => array(
-                [0] => array(...),
-                [1] => array(...),
-                ...
-            )
-            [1] => array(
-                [0] => array(...),
-                [1] => array(...)
-            )
-        )
-
-        upload_err = array(
-            [0] => (err) true/false,
-            [1] => '...',
-            [2] => '...',
-            [3] => '...'
-        )
-    
-     */
 ?>

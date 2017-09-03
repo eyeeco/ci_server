@@ -81,106 +81,28 @@
                                 </div>
                                 <div class="panel-body">
                               
-<?php if (!empty($records[0])) { ?>
-<?php   foreach ($records[0] as $chapter) { ?>
+<?php if (!empty($records)) { ?>
+<?php   foreach ($records as $chapter) { ?>
     <div class="chapter">
-        <p>第<?php echo $chapter['cid']; ?>章资料上传：</p>
-        <p>教案：<?php echo $chapter['file1']; ?></p>
-        <p>PPT：<?php echo $chapter['file2']; ?></p>
-        <p>测试：<?php echo $chapter['file3']; ?></p>
+        <p>资料标题：<?php echo $chapter['fname']; ?></p>
+        <p>资料文件：<?php echo $chapter['rname']; ?></p>
     </div>
 <?php   } ?>
 <?php } ?>
 
 <?php if ($status == 'chapters') { ?>
     <?php echo form_open_multipart('upload'); ?>
-        <p>第<?php echo $maxcid + 1; ?>章资料上传：</p>
-        <p>
-            <span>教学备案：</span><input type="file" name="file1" class="form-control"/>
-            <span class="errmsg"><?php echo isset($upload_err) ? $upload_err[1] : ''; ?></span>
-        </p>
-        <p>
-            <span>讲课PPT：</span><input type="file" name="file2" class="form-control"/>
-            <span class="errmsg"><?php echo isset($upload_err) ? $upload_err[2] : ''; ?></span>
-        </p>
-        <p>
-            <span>单元总结测试：</span><input type="file" name="file3" class="form-control"/>
-            <span class="errmsg"><?php echo isset($upload_err) ? $upload_err[3] : ''; ?></span>
-        </p>
+        <div class="errmsg"><?php echo $upload_err; ?></div>
+        <p><span>资料标题：</span><input type="text" name="fname" class="form-control" /></p>
+        <p><span>资料文件：</span><input type="file" name="fpath" class="form-control" /></p>
         <p><input type="submit" name="uploadchapter" value="上传本章" class="form-control"/></p>
     </form>
 <?php } ?>
 
-<?php if (!empty($records[0]) && $status == 'chapters') { ?>
-    <?php echo form_open('upload', array('method' => 'post')); ?>
-        <input type="submit" name="goexam" value="不再上传资料，开始上传考试内容" class="form-control"/>
+<?php if (!empty($records) && $status == 'chapters') { ?>
+    <?php echo form_open('upload', array('method' => 'post', 'onclick' => "return confirm('确定要结束本次上传吗？');")); ?>
+        <input type="submit" name="gofinish" value="结束本次上传" class="form-control"/>
     <form>
-<?php } ?>
-
-<?php if (in_array($status, array('midexam', 'endexam', 'finished'))) { ?>
-    <h2>考试</h2>
-<?php } ?>
-
-<?php if ($status == 'midexam') { ?>
-    <?php echo form_open_multipart('upload'); ?>
-        <p>期中.</p>
-        <p>
-            <span>试卷1：</span><input type="file" name="file1" class="form-control">
-            <span class="errmsg"><?php echo isset($upload_err) ? $upload_err[1] : ''; ?></span>
-        </p>
-        <p>
-            <span>试卷2：</span><input type="file" name="file2" class="form-control">
-            <span class="errmsg"><?php echo isset($upload_err) ? $upload_err[2] : ''; ?></span>
-        </p>
-        <p>
-            <span>试卷3：</span><input type="file" name="file3" class="form-control">
-            <span class="errmsg"><?php echo isset($upload_err) ? $upload_err[3] : ''; ?></span>
-        </p>
-        <p><input type="submit" name="uploadmidexam" value="上传期中试卷" class="form-control"></p>
-    </form>
-    <?php echo form_open('upload', array('method' => 'post')); ?>
-        <input type="submit" name="goendexam" value="无期中试卷，去上传期末试卷" class="form-control" />
-    </form>
-<?php } ?>
-
-<?php if (!empty($records[1][0])) { ?>
-    <div class="chapter">
-        <p>期中.</p>
-        <p>试卷1：<?php echo $records[1][0]['file1']; ?></p>
-        <p>试卷2：<?php echo $records[1][0]['file2']; ?></p>
-        <p>试卷3：<?php echo $records[1][0]['file3']; ?></p>
-    </div>
-<?php } ?>
-
-<?php if ($status == 'endexam') { ?>
-    <?php echo form_open_multipart('upload'); ?>
-        <p>期末.</p>
-        <p>
-            <span>试卷1：</span><input type="file" name="file1" class="form-control">
-            <span class="errmsg"><?php echo isset($upload_err) ? $upload_err[1] : ''; ?></span>
-        </p>
-        <p>
-            <span>试卷2：</span><input type="file" name="file2" class="form-control">
-            <span class="errmsg"><?php echo isset($upload_err) ? $upload_err[2] : ''; ?></span>
-        </p>
-        <p>
-            <span>试卷3：</span><input type="file" name="file3" class="form-control">
-            <span class="errmsg"><?php echo isset($upload_err) ? $upload_err[3] : ''; ?></span>
-        </p>
-        <p><input type="submit" name="uploadendexam" value="上传期末试卷" class="form-control"></p>
-    </form>
-    <?php echo form_open('upload', array('method' => 'post')); ?>
-        <input type="submit" name="gofinish" value="无期末试卷，结束本次上传" class="form-control"/>
-    </form>
-<?php } ?>
-
-<?php if (!empty($records[1][1])) { ?>
-    <div class="chapter">
-        <p>期末.</p>
-        <p>试卷1：<?php echo $records[1][1]['file1']; ?></p>
-        <p>试卷2：<?php echo $records[1][1]['file2']; ?></p>
-        <p>试卷3：<?php echo $records[1][1]['file3']; ?></p>
-    </div>
 <?php } ?>
 
 <?php if ($status == 'finish') { ?>
@@ -204,5 +126,11 @@
 		</div>
 		<!-- END MAIN -->
 		<div class="clearfix"></div>
+
+<script>
+    function confirmGoFinish() {
+        return confirm('确定要结束本次上传吗？');
+    }
+</script>
 
 
